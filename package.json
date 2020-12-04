@@ -3,25 +3,32 @@
   "version": "1.0.0",
   "description": "Ecommerce App",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node backend/server"
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tuckerzb/proshop.git"
   },
   "author": "Zach Tucker",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tuckerzb/proshop/issues"
   },
   "homepage": "https://github.com/tuckerzb/proshop#readme",
   "dependencies": {
     "axios": "^0.21.0",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "install": "^0.13.0"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "nodemon": "^2.0.6"
   }
 }
