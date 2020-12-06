@@ -7,7 +7,8 @@ import Product from '../models/productModel.js';
 // @route    GET /api/products
 // @access   Public
 router.get('/', asyncHandler(async (req, res) => {
-    const products = await Product.find({})
+    const products = await Product.find({});
+    throw new Error('Not Authorized');
     res.json(products);
 }));
 
