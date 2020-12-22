@@ -28,8 +28,9 @@ const OrderScreen = ({match}) => {
             const {data: clientId} = await axios.get('/api/config/paypal');
             const script = document.createElement('script');
             script.type='text/javascript';
+            script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
             script.async = true;
-            script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}`;
+            // script.dataset.namespace = 'paypal';
             script.onload = () => {
                 setSdkReady(true);
             };
@@ -162,7 +163,18 @@ const OrderScreen = ({match}) => {
                                 <ListGroup.Item>
                                     {loadingPay && <Loader />}
                                     {!sdkReady ? <Loader /> : (
-                                        <PayPalButton amount={order.totalPice} onSuccess={successPaymentHandler} />
+                                        <PayPalButton
+                                        createOrder={(data, actions) => {
+                                            return actions.order.create({
+                                                purchase_units: [{
+                                                    amount: {
+                                                        currency_code: "USD",
+                                                        value: order.totalPrice
+                                                    }
+                                                }]
+                                            })
+                                        }}
+                                        onSuccess={successPaymentHandler} />
                                     )}
                                 </ListGroup.Item>
                             )}
