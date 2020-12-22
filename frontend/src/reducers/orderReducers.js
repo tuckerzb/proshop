@@ -1,4 +1,4 @@
-import {ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAILURE, ORDER_PAY_RESET, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, ORDER_PAY_FAILURE} from '../constants/orderConstants';
+import {ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAILURE, ORDER_PAY_RESET, ORDER_PAY_REQUEST, ORDER_PAY_SUCCESS, ORDER_PAY_FAILURE, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_FAILURE, ORDER_LIST_MY_RESET} from '../constants/orderConstants';
 
 export const orderCreateReducer = (state = {}, action) => {
     switch (action.type) {
@@ -47,6 +47,26 @@ export const orderPayReducer = (state = {}, action) => {
             break;
         case ORDER_PAY_RESET:
             return {}
+            break;
+        default:
+            return state;
+            break;
+    }
+}
+
+export const orderListMyReducer = (state = {orders: []}, action) => {
+    switch (action.type) {
+        case ORDER_LIST_MY_REQUEST:
+            return {loading: true};
+            break;
+        case ORDER_LIST_MY_SUCCESS:
+            return {loading: false, orders: action.payload};
+            break;
+        case ORDER_LIST_MY_FAILURE:
+            return {loading: false, error: action.payload};
+            break;
+        case ORDER_LIST_MY_RESET:
+            return {orders: []}
             break;
         default:
             return state;
