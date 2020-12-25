@@ -30,7 +30,7 @@ const ProductListScreen = ({history, match}) => {
        }
        
        if (successCreate) {
-           history.push(`/admin/product/${createdProduct._id}/edit`);
+           history.push(`/admin/products/${createdProduct._id}/edit`);
        } else {
             dispatch(listProducts());
        }
@@ -57,10 +57,8 @@ const ProductListScreen = ({history, match}) => {
                     <Button className='my-3' onClick={createProductHandler}><i className='fas fa-plus'>Create Product</i></Button>
                 </Col>
             </Row>
-            {successDelete && <Message>Product Deleted</Message>}
             {loadingDelete && <Loader />}
             {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-            {successCreate && <Message>Product Created</Message>}
             {loadingCreate && <Loader />}
             {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
