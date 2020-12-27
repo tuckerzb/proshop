@@ -10,7 +10,7 @@ import Loader from '../components/Loader';
 import {getOrderDetails, payOrder, deliverOrder} from '../actions/orderActions';
 import {ORDER_PAY_RESET, ORDER_DELIVER_RESET} from '../constants/orderConstants';
 
-const OrderScreen = ({match}) => {
+const OrderScreen = ({match, history}) => {
     const dispatch = useDispatch();
 
     const [sdkReady, setSdkReady] = useState(false);
@@ -30,6 +30,10 @@ const OrderScreen = ({match}) => {
     const {success: successDeliver, loading:loadingDeliver, error:errorDeliver} = orderDeliver;
 
     useEffect(() => {
+        if (!userInfo) {
+            history.push('/login');
+        }
+
         const addPayPalScript = async () => {
             const {data: clientId} = await axios.get('/api/config/paypal');
             const script = document.createElement('script');
@@ -75,7 +79,7 @@ const OrderScreen = ({match}) => {
         console.log(paymentResult);
         dispatch(payOrder(id, paymentResult));
       }
-      
+
       return loading ? (
         <Loader />
       ) : error ? (
