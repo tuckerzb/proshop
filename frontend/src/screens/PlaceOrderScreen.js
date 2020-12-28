@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import {Link} from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';

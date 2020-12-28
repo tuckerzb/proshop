@@ -3,7 +3,6 @@ import axios from 'axios';
 import {PayPalButton} from 'react-paypal-button-v2';
 import {Button, Row, Col, ListGroup, Image, Card} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import FormContainer from '../components/FormContainer';
 import Message from '../components/Message';
 import {Link} from 'react-router-dom';
 import Loader from '../components/Loader';
@@ -24,10 +23,10 @@ const OrderScreen = ({match, history}) => {
     const {order, loading, error} = orderDetails;
 
     const orderPay = useSelector(state => state.orderPay);
-    const {success: successPay, loading:loadingPay, error:errorPay} = orderPay;
+    const {success: successPay, loading:loadingPay} = orderPay;
 
     const orderDeliver = useSelector(state => state.orderDeliver);
-    const {success: successDeliver, loading:loadingDeliver, error:errorDeliver} = orderDeliver;
+    const {success: successDeliver, loading:loadingDeliver} = orderDeliver;
 
     useEffect(() => {
         if (!userInfo) {
@@ -58,7 +57,7 @@ const OrderScreen = ({match, history}) => {
                 setSdkReady(true);
             }
         }
-    }, [dispatch, successPay, successDeliver, id, order]);
+    }, [dispatch, history, userInfo, successPay, successDeliver, id, order]);
 
     const deliverHandler = () => {
         dispatch(deliverOrder(order._id));

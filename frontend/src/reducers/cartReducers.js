@@ -18,7 +18,6 @@ export const cartReducer = (state = {cartItems: [], shippingAddress: {}}, action
                   cartItems: [...state.cartItems, item],
                 }
               }
-            break;
 
           case CART_REMOVE_ITEM:
             return {

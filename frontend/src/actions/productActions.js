@@ -32,7 +32,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}` 
             }
         };
-        const {data} = await axios.delete(`/api/products/${id}`, config);
+        await axios.delete(`/api/products/${id}`, config);
 
         dispatch({
             type: PRODUCT_DELETE_SUCCESS
@@ -103,7 +103,7 @@ export const createProductReview = (productId, review) => async (dispatch, getSt
                 Authorization: `Bearer ${userInfo.token}` 
             }
         };
-        const {data} = await axios.post(`/api/products/${productId}/reviews`, review, config);
+        await axios.post(`/api/products/${productId}/reviews`, review, config);
 
         dispatch({
             type: PRODUCT_CREATE_REVIEW_SUCCESS,
